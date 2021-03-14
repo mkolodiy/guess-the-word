@@ -1,24 +1,58 @@
-import logo from './logo.svg';
+import { CssBaseline, IconButton, Typography } from '@material-ui/core';
+import { Autorenew, Translate } from '@material-ui/icons';
+import { useState } from 'react';
 import './App.css';
 
+const words = [
+  {
+    translation: 'das Ende',
+    word: 'la fine',
+  },
+  {
+    translation: 'die Waschmaschine',
+    word: 'la lavatrice',
+  },
+  {
+    translation: 'das Motorad',
+    word: 'la moto',
+  },
+];
+
+const getRandomItem = () => words[Math.floor(Math.random() * words.length)];
+
 function App() {
+  const [showWord, setShowWord] = useState(false);
+  const [item, setItem] = useState(getRandomItem());
+
+  const getNextItem = () => {
+    setShowWord(false);
+    setItem(getRandomItem());
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <CssBaseline />
+      <div className="container">
+        <div className="top-area">
+          <Typography variant="h4" component="div">
+            {item.translation}
+          </Typography>
+          <div className="translate-button">
+            <IconButton onClick={() => setShowWord(true)}>
+              <Translate />
+            </IconButton>
+          </div>
+          <Typography variant="h4" component="div">
+            {showWord && item.word}
+          </Typography>
+        </div>
+        <div className="bottom-area">
+          <IconButton onClick={getNextItem}>
+            <Autorenew />
+          </IconButton>
+        </div>
+      </div>
+    </>
   );
 }
 
