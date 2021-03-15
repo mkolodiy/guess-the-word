@@ -28,3 +28,14 @@ button > span > svg {
 .translate-button {
   padding: 3rem 0;
 }
+
+.upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+input {
+  display: none !important;
+}
